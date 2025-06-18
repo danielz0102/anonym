@@ -1,0 +1,33 @@
+{
+  "name": "anonym",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "dev": "node --watch app.js",
+    "start": "node app.js"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.12.1",
+  "devDependencies": {
+    "@eslint/js": "^9.29.0",
+    "eslint": "^9.29.0",
+    "globals": "^16.2.0",
+    "prettier": "^3.5.3",
+    "prettier-plugin-ejs": "^1.0.3"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^16.5.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-async-handler": "^1.2.0",
+    "express-validator": "^7.2.1",
+    "pg": "^8.16.1"
+  }
+}
