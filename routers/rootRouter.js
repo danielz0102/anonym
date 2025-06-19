@@ -6,4 +6,4 @@ export const rootRouter = Router()
 
 rootRouter.get('/', RootController.renderHome)
 rootRouter.get('/sign-up', RootController.renderSignUp)
-rootRouter.post('/sign-up', validateUser(['body']), RootController.signup)
+rootRouter.post('/sign-up', validateUser(), RootController.signup)
