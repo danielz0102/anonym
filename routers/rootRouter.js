@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import RootController from '../controllers/rootController.js'
-import { validateUser } from '../lib/validations/validateUser.js'
+import { validateUser } from '#validations/validateUser.js'
 
 export const rootRouter = Router()
 

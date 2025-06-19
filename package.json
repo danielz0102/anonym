@@ -10,7 +10,8 @@
     "start": "node app.js"
   },
   "imports": {
-    "#middlewares/*": "./lib/middlewares/*"
+    "#middlewares/*": "./lib/middlewares/*",
+    "#validations/*": "./lib/validations/*"
   },
   "type": "module",
   "keywords": [],
