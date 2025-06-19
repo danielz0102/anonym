@@ -1,7 +1,6 @@
 import bcrypt from 'bcryptjs'
-
-import UsersModel from '../models/usersModel.js'
 import { validationResult, matchedData } from 'express-validator'
+import UsersModel from '../models/usersModel.js'
 
 const renderHome = (req, res) => {
   res.send('Hello World!')
@@ -15,14 +14,28 @@ const signup = async (req, res) => {
   const errors = validationResult(req)
 
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() })
+    return res.render('signup', {
+      validationErrors: errors.array().map((error) => error.msg),
+      formData: {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        username: req.body.username,
+      },
+    })
   }
 
   const userData = matchedData(req)
   const userExists = await UsersModel.userExists(userData.username)
 
   if (userExists) {
-    return res.status(400).json({ error: 'Username already exists' })
+    return res.render('signup', {
+      logicError: 'Username already exists',
+      formData: {
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        username: userData.username,
+      },
+    })
   }
 
   const hashedPassword = await bcrypt.hash(userData.password, 10)
@@ -38,7 +51,7 @@ const signup = async (req, res) => {
     return res.status(500).json({ error: 'Failed to create user' })
   }
 
-  console.log({ userId })
+  console.log({ userRegistered: userId })
 
   res.redirect('/')
 }
