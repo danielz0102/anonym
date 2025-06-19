@@ -9,6 +9,9 @@
     "dev": "node --watch app.js",
     "start": "node app.js"
   },
+  "imports": {
+    "#middlewares/*": "./lib/middlewares/*"
+  },
   "type": "module",
   "keywords": [],
   "author": "",
