@@ -1,5 +1,7 @@
 import express from 'express'
 import session from 'express-session'
+import passport from 'passport'
+import './config/auth.js'
 
 import { rootRouter } from './routers/rootRouter.js'
 import { handleError } from '#middlewares/handleError.js'
@@ -7,7 +9,6 @@ import { render404 } from '#middlewares/render404.js'
 import { setUser } from '#middlewares/setUser.js'
 import { getSessionStore } from './db/index.js'
 import { CONFIG } from './config/config.js'
-import auth from './config/auth.js'
 
 const app = express()
 
@@ -24,7 +25,7 @@ app.use(
 )
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
-app.use(auth.session())
+app.use(passport.session())
 app.use(setUser)
 
 app.use('/', rootRouter)

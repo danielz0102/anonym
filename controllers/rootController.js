@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs'
+import passport from 'passport'
 import { validationResult, matchedData } from 'express-validator'
 import UsersModel from '../models/usersModel.js'
-import auth from '../config/auth.js'
 
 function renderHome(req, res) {
   res.render('home')
@@ -58,7 +58,7 @@ async function signup(req, res) {
 }
 
 function login(req, res, next) {
-  auth.authenticate('local', (err, user, info) => {
+  passport.authenticate('local', (err, user, info) => {
     if (err) {
       return next(err)
     }
