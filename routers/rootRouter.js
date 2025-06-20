@@ -6,7 +6,7 @@ export const rootRouter = Router()
 
 rootRouter.get('/', RootController.renderHome)
 rootRouter.get('/sign-up', RootController.renderSignUp)
-rootRouter.post('/sign-up', validateUser(), RootController.signup)
+rootRouter.post('/sign-up', validateUser(), RootController.signUp)
 rootRouter.get('/login', RootController.renderLogin)
 rootRouter.post('/login', RootController.login)
 rootRouter.get('/logout', RootController.logout)

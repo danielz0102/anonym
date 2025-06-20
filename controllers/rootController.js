@@ -7,18 +7,18 @@ function renderHome(req, res) {
 }
 
 function renderSignUp(req, res) {
-  res.render('signup')
+  res.render('sign-up')
 }
 
 function renderLogin(req, res) {
   res.render('login')
 }
 
-async function signup(req, res, next) {
+async function signUp(req, res, next) {
   const errors = validationResult(req)
 
   if (!errors.isEmpty()) {
-    return res.render('signup', {
+    return res.render('sign-up', {
       validationErrors: errors.array().map((error) => error.msg),
       formData: {
         firstName: req.body.firstName,
@@ -32,7 +32,7 @@ async function signup(req, res, next) {
   const userExists = await UsersModel.userExists(userData.username)
 
   if (userExists) {
-    return res.render('signup', {
+    return res.render('sign-up', {
       logicError: 'Username already exists',
       formData: {
         firstName: userData.firstName,
@@ -91,7 +91,7 @@ export default {
   renderHome,
   renderSignUp,
   renderLogin,
-  signup,
+  signUp,
   login,
   logout,
 }
