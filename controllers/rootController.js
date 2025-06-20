@@ -2,7 +2,6 @@ import passport from 'passport'
 import { validationResult, matchedData } from 'express-validator'
 
 import UsersModel from '#models/UsersModel.js'
-import MessagesModel from '#models/MessagesModel.js'
 
 async function joinVip(req, res) {
   const { secret } = req.body
@@ -89,33 +88,9 @@ function logout(req, res) {
   })
 }
 
-async function createMessage(req, res) {
-  const errors = validationResult(req)
-
-  if (!errors.isEmpty()) {
-    return res.render('new-message', {
-      errors: errors.array().map((error) => error.msg),
-      formData: {
-        title: req.body.title,
-        content: req.body.content,
-      },
-    })
-  }
-
-  const messageData = matchedData(req)
-  await MessagesModel.create({
-    userId: req.user.id,
-    title: messageData.title,
-    content: messageData.content,
-  })
-
-  res.redirect('/')
-}
-
 export default {
   signUp,
   login,
   logout,
   joinVip,
-  createMessage,
 }
