@@ -8,7 +8,7 @@ import { handleError } from '#middlewares/handleError.js'
 import { render404 } from '#middlewares/render404.js'
 import { setUser } from '#middlewares/setUser.js'
 import { getSessionStore } from './db/index.js'
-import { SESSION_SECRET } from './config/config.js'
+import { SESSION_SECRET, NODE_ENV } from './config/config.js'
 
 const app = express()
 
@@ -21,6 +21,10 @@ app.use(
     secret: SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      secure: NODE_ENV === 'production',
+      httpOnly: true,
+    },
   }),
 )
 app.use(express.urlencoded({ extended: true }))
