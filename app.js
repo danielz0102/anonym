@@ -1,15 +1,29 @@
 import express from 'express'
+import session from 'express-session'
+
 import { rootRouter } from './routers/rootRouter.js'
 import { handleError } from '#middlewares/handleError.js'
 import { render404 } from '#middlewares/render404.js'
+import { getSessionStore } from './db/index.js'
+import { CONFIG } from './config/config.js'
+import auth from './config/auth.js'
 
 const app = express()
 
 app.set('view engine', 'ejs')
 app.set('views', './views')
 
+app.use(
+  session({
+    store: getSessionStore(session),
+    secret: CONFIG.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  }),
+)
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
+app.use(auth.session())
 
 app.use('/', rootRouter)
 app.use(render404)

@@ -17,7 +17,27 @@ const userExists = async (username) => {
   return rows.length > 0
 }
 
+const getUser = async (identifier) => {
+  const query = 'SELECT * FROM users WHERE username = $1 OR id = $1'
+  const { rows } = await db.query(query, [identifier])
+  const user = rows[0]
+
+  if (!user) {
+    return null
+  }
+
+  return {
+    id: user.id,
+    firstName: user.first_name,
+    lastName: user.last_name,
+    username: user.username,
+    password: user.password,
+    vip: user.vip,
+  }
+}
+
 export default {
   create,
   userExists,
+  getUser,
 }
