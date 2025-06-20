@@ -14,7 +14,7 @@ function renderLogin(req, res) {
   res.render('login')
 }
 
-async function signup(req, res) {
+async function signup(req, res, next) {
   const errors = validationResult(req)
 
   if (!errors.isEmpty()) {
@@ -42,14 +42,20 @@ async function signup(req, res) {
     })
   }
 
-  await UsersModel.create({
+  const idInserted = await UsersModel.create({
     firstName: userData.firstName,
     lastName: userData.lastName,
     username: userData.username,
     password: userData.password,
   })
 
-  res.redirect('/')
+  req.login({ id: idInserted }, (err) => {
+    if (err) {
+      return next(err)
+    }
+
+    res.redirect('/')
+  })
 }
 
 function login(req, res, next) {
@@ -67,7 +73,7 @@ function login(req, res, next) {
         return next(err)
       }
 
-      return res.redirect('/')
+      res.redirect('/')
     })
   })(req, res, next)
 }

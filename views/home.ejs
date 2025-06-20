@@ -6,7 +6,10 @@
     <title>Anonym</title>
   </head>
   <body>
-    <h1>Welcome to Anonym</h1>
+    <h1>
+      Welcome
+      <%= locals.currentUser?.username || 'to Anonym' %>
+    </h1>
     <% if (locals.currentUser) { %>
     <a href="/logout">Logout</a>
     <% } else { %>
