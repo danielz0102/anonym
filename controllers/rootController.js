@@ -1,31 +1,8 @@
 import passport from 'passport'
 import { validationResult, matchedData } from 'express-validator'
+
 import UsersModel from '../models/usersModel.js'
 import MessagesModel from '../models/messagesModel.js'
-
-function renderHome(req, res) {
-  res.render('home')
-}
-
-function renderSignUp(req, res) {
-  res.render('sign-up')
-}
-
-function renderLogin(req, res) {
-  res.render('login')
-}
-
-function renderJoinVip(req, res) {
-  if (req.user.vip) {
-    return res.redirect('/')
-  }
-
-  res.render('join-vip')
-}
-
-function renderNewMessage(req, res) {
-  res.render('new-message')
-}
 
 async function joinVip(req, res) {
   const { secret } = req.body
@@ -136,11 +113,6 @@ async function createMessage(req, res) {
 }
 
 export default {
-  renderHome,
-  renderSignUp,
-  renderLogin,
-  renderJoinVip,
-  renderNewMessage,
   signUp,
   login,
   logout,
