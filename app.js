@@ -4,6 +4,7 @@ import session from 'express-session'
 import { rootRouter } from './routers/rootRouter.js'
 import { handleError } from '#middlewares/handleError.js'
 import { render404 } from '#middlewares/render404.js'
+import { setUser } from '#middlewares/setUser.js'
 import { getSessionStore } from './db/index.js'
 import { CONFIG } from './config/config.js'
 import auth from './config/auth.js'
@@ -24,6 +25,7 @@ app.use(
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
 app.use(auth.session())
+app.use(setUser)
 
 app.use('/', rootRouter)
 app.use(render404)
