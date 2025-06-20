@@ -2,15 +2,15 @@ import bcrypt from 'bcryptjs'
 import { validationResult, matchedData } from 'express-validator'
 import UsersModel from '../models/usersModel.js'
 
-const renderHome = (req, res) => {
+function renderHome(req, res) {
   res.render('home')
 }
 
-const renderSignUp = (req, res) => {
+function renderSignUp(req, res) {
   res.render('signup')
 }
 
-const signup = async (req, res) => {
+async function signup(req, res) {
   const errors = validationResult(req)
 
   if (!errors.isEmpty()) {
