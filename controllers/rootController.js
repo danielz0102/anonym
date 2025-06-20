@@ -3,7 +3,7 @@ import { validationResult, matchedData } from 'express-validator'
 import UsersModel from '../models/usersModel.js'
 
 const renderHome = (req, res) => {
-  res.send('Hello World!')
+  res.render('home')
 }
 
 const renderSignUp = (req, res) => {
