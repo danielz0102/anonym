@@ -4,11 +4,12 @@ import passport from 'passport'
 import './config/auth.js'
 
 import { rootRouter } from './routers/rootRouter.js'
+import { getSessionStore } from './db/index.js'
+import { SESSION_SECRET, NODE_ENV } from './config/config.js'
+
 import { handleError } from '#middlewares/handleError.js'
 import { render404 } from '#middlewares/render404.js'
 import { setUser } from '#middlewares/setUser.js'
-import { getSessionStore } from './db/index.js'
-import { SESSION_SECRET, NODE_ENV } from './config/config.js'
 
 const app = express()
 
