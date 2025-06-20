@@ -47,10 +47,6 @@ const signup = async (req, res) => {
   }
   const userId = await UsersModel.create(user)
 
-  if (!userId) {
-    return res.status(500).json({ error: 'Failed to create user' })
-  }
-
   console.log({ userRegistered: userId })
 
   res.redirect('/')

@@ -6,7 +6,7 @@ const create = async ({ firstName, lastName, username, password }) => {
     [firstName, lastName, username, password],
   )
   const user = rows[0]
-  return Number(user.id) || null
+  return Number(user.id)
 }
 
 const userExists = async (username) => {
