@@ -1,9 +1,12 @@
+import bcrypt from 'bcryptjs'
 import { db } from '../db/index.js'
 
 async function create({ firstName, lastName, username, password }) {
+  const hashedPassword = await bcrypt.hash(password, 10)
+
   const { rows } = await db.query(
     'INSERT INTO users (first_name, last_name, username, password) VALUES ($1, $2, $3, $4) RETURNING id',
-    [firstName, lastName, username, password],
+    [firstName, lastName, username, hashedPassword],
   )
   const user = rows[0]
   return Number(user.id)

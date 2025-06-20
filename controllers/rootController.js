@@ -1,4 +1,3 @@
-import bcrypt from 'bcryptjs'
 import passport from 'passport'
 import { validationResult, matchedData } from 'express-validator'
 import UsersModel from '../models/usersModel.js'
@@ -43,16 +42,12 @@ async function signup(req, res) {
     })
   }
 
-  const hashedPassword = await bcrypt.hash(userData.password, 10)
-  const user = {
+  await UsersModel.create({
     firstName: userData.firstName,
     lastName: userData.lastName,
     username: userData.username,
-    password: hashedPassword,
-  }
-  const userId = await UsersModel.create(user)
-
-  console.log({ userRegistered: userId })
+    password: userData.password,
+  })
 
   res.redirect('/')
 }
