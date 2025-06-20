@@ -16,3 +16,4 @@ rootRouter.post(
     failureRedirect: '/login',
   }),
 )
+rootRouter.get('/logout', RootController.logout)

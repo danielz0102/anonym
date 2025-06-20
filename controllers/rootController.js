@@ -56,9 +56,19 @@ async function signup(req, res) {
   res.redirect('/')
 }
 
+function logout(req, res) {
+  req.logout((err) => {
+    if (err) {
+      throw new Error(err)
+    }
+    res.redirect('/login')
+  })
+}
+
 export default {
   renderHome,
   renderSignUp,
   renderLogin,
   signup,
+  logout,
 }
