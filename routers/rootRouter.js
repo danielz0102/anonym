@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import RootController from '#controllers/rootController.js'
+import UsersController from '#controllers/UsersController.js'
 import MessagesController from '#controllers/MessagesController.js'
 import RenderController from '#controllers/RenderController.js'
 
@@ -17,10 +17,10 @@ rootRouter.get('/sign-up', RenderController.renderSignUp)
 rootRouter.get('/join-vip', checkAuth, RenderController.renderJoinVip)
 rootRouter.get('/new-message', checkAuth, RenderController.renderNewMessage)
 
-rootRouter.get('/logout', RootController.logout)
-rootRouter.post('/login', RootController.login)
-rootRouter.post('/sign-up', validateUser(), RootController.signUp)
-rootRouter.post('/join-vip', checkAuth, RootController.joinVip)
+rootRouter.get('/logout', UsersController.logout)
+rootRouter.post('/login', UsersController.login)
+rootRouter.post('/sign-up', validateUser(), UsersController.signUp)
+rootRouter.post('/join-vip', checkAuth, UsersController.joinVip)
 rootRouter.post(
   '/new-message',
   checkAuth,
