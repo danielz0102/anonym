@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import RootController from '../controllers/rootController.js'
-import RenderController from '../controllers/RenderController.js'
+import RootController from '#controllers/rootController.js'
+import RenderController from '#controllers/RenderController.js'
 import { validateUser } from '#validations/validateUser.js'
 import { validateMessage } from '#validations/validateMessage.js'
 import { checkAuth } from '#middlewares/checkAuth.js'
