@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs'
 import { validationResult, matchedData } from 'express-validator'
 import UsersModel from '../models/usersModel.js'
+import auth from '../config/auth.js'
 
 function renderHome(req, res) {
   res.render('home')
@@ -56,6 +57,26 @@ async function signup(req, res) {
   res.redirect('/')
 }
 
+function login(req, res, next) {
+  auth.authenticate('local', (err, user, info) => {
+    if (err) {
+      return next(err)
+    }
+
+    if (!user) {
+      return res.render('login', { loginError: info.message })
+    }
+
+    req.login(user, (err) => {
+      if (err) {
+        return next(err)
+      }
+
+      return res.redirect('/')
+    })
+  })(req, res, next)
+}
+
 function logout(req, res) {
   req.logout((err) => {
     if (err) {
@@ -70,5 +91,6 @@ export default {
   renderSignUp,
   renderLogin,
   signup,
+  login,
   logout,
 }
