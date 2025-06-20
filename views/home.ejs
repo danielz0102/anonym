@@ -11,6 +11,7 @@
       <%= locals.currentUser?.username || 'to Anonym' %>
     </h1>
     <% if (locals.currentUser) { %>
+    <a href="/new-message">Create a new message</a>
     <a href="/logout">Logout</a>
     <% if (!currentUser.vip) { %>
     <a href="/join-vip">Join VIP</a>
