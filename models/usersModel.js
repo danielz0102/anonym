@@ -18,7 +18,8 @@ const userExists = async (username) => {
 }
 
 const getUser = async (identifier) => {
-  const query = 'SELECT * FROM users WHERE username = $1 OR id = $1'
+  const field = typeof identifier === 'number' ? 'id' : 'username'
+  const query = `SELECT * FROM users WHERE ${field} = $1`
   const { rows } = await db.query(query, [identifier])
   const user = rows[0]
 

@@ -10,6 +10,10 @@ function renderSignUp(req, res) {
   res.render('signup')
 }
 
+function renderLogin(req, res) {
+  res.render('login')
+}
+
 async function signup(req, res) {
   const errors = validationResult(req)
 
@@ -55,5 +59,6 @@ async function signup(req, res) {
 export default {
   renderHome,
   renderSignUp,
+  renderLogin,
   signup,
 }
