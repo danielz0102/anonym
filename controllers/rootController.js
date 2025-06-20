@@ -3,16 +3,33 @@ import { validationResult, matchedData } from 'express-validator'
 
 import UsersModel from '#models/UsersModel.js'
 
-async function joinVip(req, res) {
-  const { secret } = req.body
+function login(req, res, next) {
+  passport.authenticate('local', (err, user, info) => {
+    if (err) {
+      return next(err)
+    }
 
-  if (secret !== 'odinites') {
-    return res.render('join-vip', { error: 'The secret is wrong' })
-  }
+    if (!user) {
+      return res.render('login', { loginError: info.message })
+    }
 
-  await UsersModel.joinVip(req.user.id)
-  req.user.vip = true
-  res.redirect('/')
+    req.login(user, (err) => {
+      if (err) {
+        return next(err)
+      }
+
+      res.redirect('/')
+    })
+  })(req, res, next)
+}
+
+function logout(req, res) {
+  req.logout((err) => {
+    if (err) {
+      throw new Error(err)
+    }
+    res.redirect('/login')
+  })
 }
 
 async function signUp(req, res, next) {
@@ -59,33 +76,16 @@ async function signUp(req, res, next) {
   })
 }
 
-function login(req, res, next) {
-  passport.authenticate('local', (err, user, info) => {
-    if (err) {
-      return next(err)
-    }
+async function joinVip(req, res) {
+  const { secret } = req.body
 
-    if (!user) {
-      return res.render('login', { loginError: info.message })
-    }
+  if (secret !== 'odinites') {
+    return res.render('join-vip', { error: 'The secret is wrong' })
+  }
 
-    req.login(user, (err) => {
-      if (err) {
-        return next(err)
-      }
-
-      res.redirect('/')
-    })
-  })(req, res, next)
-}
-
-function logout(req, res) {
-  req.logout((err) => {
-    if (err) {
-      throw new Error(err)
-    }
-    res.redirect('/login')
-  })
+  await UsersModel.joinVip(req.user.id)
+  req.user.vip = true
+  res.redirect('/')
 }
 
 export default {
