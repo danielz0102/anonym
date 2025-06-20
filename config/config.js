@@ -1,6 +1,3 @@
 import 'dotenv/config'
 
-export const CONFIG = {
-  DB_URL: process.env.DB_URL,
-  SESSION_SECRET: process.env.SESSION_SECRET,
-}
+export const { DB_URL, SESSION_SECRET, NODE_ENV = 'development' } = process.env

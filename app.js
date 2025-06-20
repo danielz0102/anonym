@@ -8,7 +8,7 @@ import { handleError } from '#middlewares/handleError.js'
 import { render404 } from '#middlewares/render404.js'
 import { setUser } from '#middlewares/setUser.js'
 import { getSessionStore } from './db/index.js'
-import { CONFIG } from './config/config.js'
+import { SESSION_SECRET } from './config/config.js'
 
 const app = express()
 
@@ -18,7 +18,7 @@ app.set('views', './views')
 app.use(
   session({
     store: getSessionStore(session),
-    secret: CONFIG.SESSION_SECRET,
+    secret: SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
   }),
