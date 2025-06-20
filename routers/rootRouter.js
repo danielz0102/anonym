@@ -1,12 +1,16 @@
 import { Router } from 'express'
 import RootController from '../controllers/rootController.js'
 import { validateUser } from '#validations/validateUser.js'
+import { checkAuth } from '#middlewares/checkAuth.js'
 
 export const rootRouter = Router()
 
 rootRouter.get('/', RootController.renderHome)
-rootRouter.get('/sign-up', RootController.renderSignUp)
-rootRouter.post('/sign-up', validateUser(), RootController.signUp)
 rootRouter.get('/login', RootController.renderLogin)
-rootRouter.post('/login', RootController.login)
+rootRouter.get('/sign-up', RootController.renderSignUp)
+rootRouter.get('/join-vip', checkAuth, RootController.renderJoinVip)
+
 rootRouter.get('/logout', RootController.logout)
+rootRouter.post('/login', RootController.login)
+rootRouter.post('/sign-up', validateUser(), RootController.signUp)
+rootRouter.post('/join-vip', checkAuth, RootController.joinVip)

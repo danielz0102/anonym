@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join VIP</title>
+  </head>
+  <body>
+    <h1>Join VIP</h1>
+
+    <% if (locals.error) { %>
+    <p><%= error %></p>
+    <% } %>
+
+    <form action="join-vip" method="post">
+      <label for="secret">Enter the secret key</label>
+      <input
+        type="password"
+        id="secret"
+        name="secret"
+        placeholder="********"
+        required
+      />
+      <button type="submit">Join VIP</button>
+    </form>
+  </body>
+</html>

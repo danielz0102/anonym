@@ -12,6 +12,9 @@
     </h1>
     <% if (locals.currentUser) { %>
     <a href="/logout">Logout</a>
+    <% if (!currentUser.vip) { %>
+    <a href="/join-vip">Join VIP</a>
+    <% } %>
     <% } else { %>
     <a href="/sign-up">Sign Up</a>
     <a href="/login">Login</a>

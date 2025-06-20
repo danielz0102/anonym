@@ -14,6 +14,26 @@ function renderLogin(req, res) {
   res.render('login')
 }
 
+function renderJoinVip(req, res) {
+  if (req.user.vip) {
+    return res.redirect('/')
+  }
+
+  res.render('join-vip')
+}
+
+async function joinVip(req, res) {
+  const { secret } = req.body
+
+  if (secret !== 'odinites') {
+    return res.render('join-vip', { error: 'The secret is wrong' })
+  }
+
+  await UsersModel.joinVip(req.user.id)
+  req.user.vip = true
+  res.redirect('/')
+}
+
 async function signUp(req, res, next) {
   const errors = validationResult(req)
 
@@ -91,7 +111,9 @@ export default {
   renderHome,
   renderSignUp,
   renderLogin,
+  renderJoinVip,
   signUp,
   login,
   logout,
+  joinVip,
 }
