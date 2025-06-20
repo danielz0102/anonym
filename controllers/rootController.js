@@ -1,8 +1,8 @@
 import passport from 'passport'
 import { validationResult, matchedData } from 'express-validator'
 
-import UsersModel from '#models/usersModel.js'
-import MessagesModel from '#models/messagesModel.js'
+import UsersModel from '#models/UsersModel.js'
+import MessagesModel from '#models/MessagesModel.js'
 
 async function joinVip(req, res) {
   const { secret } = req.body
