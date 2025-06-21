@@ -34,7 +34,10 @@ export function onlyAuth(req, res, next) {
     return next()
   }
 
-  res.redirect('/')
+  res.status(401).render('error', {
+    title: 'Unauthorized',
+    message: 'You must be logged in to access this page.',
+  })
 }
 
 export function onlyAdmin(req, res, next) {
@@ -42,7 +45,10 @@ export function onlyAdmin(req, res, next) {
     return next()
   }
 
-  res.redirect('/')
+  res.status(403).render('error', {
+    title: 'Forbidden',
+    message: 'You do not have permission to access this page.',
+  })
 }
 
 export default {
