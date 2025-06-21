@@ -1,7 +1,7 @@
 import MessagesModel from '#models/MessagesModel.js'
 
 async function renderHome(req, res) {
-  const messages = await MessagesModel.getAll()
+  const messages = await MessagesModel.getAll(req.user?.vip)
   res.render('home', { messages })
 }
 
