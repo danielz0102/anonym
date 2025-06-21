@@ -1,6 +1,4 @@
 import passport from 'passport'
-import { validationResult, matchedData } from 'express-validator'
-
 import UsersModel from '#models/UsersModel.js'
 
 function login(req, res, next) {
@@ -33,38 +31,25 @@ function logout(req, res) {
 }
 
 async function signUp(req, res, next) {
-  const errors = validationResult(req)
-
-  if (!errors.isEmpty()) {
-    return res.render('sign-up', {
-      validationErrors: errors.array().map((error) => error.msg),
-      formData: {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        username: req.body.username,
-      },
-    })
-  }
-
-  const userData = matchedData(req)
-  const userExists = await UsersModel.userExists(userData.username)
+  const user = req.body
+  const userExists = await UsersModel.userExists(user.username)
 
   if (userExists) {
     return res.render('sign-up', {
       logicError: 'Username already exists',
       formData: {
-        firstName: userData.firstName,
-        lastName: userData.lastName,
-        username: userData.username,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        username: user.username,
       },
     })
   }
 
   const idInserted = await UsersModel.create({
-    firstName: userData.firstName,
-    lastName: userData.lastName,
-    username: userData.username,
-    password: userData.password,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    username: user.username,
+    password: user.password,
   })
 
   req.login({ id: idInserted }, (err) => {

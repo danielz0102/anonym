@@ -13,7 +13,8 @@
     "#middlewares/*": "./lib/middlewares/*",
     "#validations/*": "./lib/validations/*",
     "#controllers/*": "./controllers/*",
-    "#models/*": "./models/*"
+    "#models/*": "./models/*",
+    "#validators/*": "./validators/*"
   },
   "type": "module",
   "keywords": [],
