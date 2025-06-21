@@ -22,6 +22,11 @@ rootRouter.get(
   UserValidator.onlyAuth,
   RenderController.renderNewMessage,
 )
+rootRouter.get(
+  '/join-admin',
+  UserValidator.onlyAuth,
+  RenderController.renderJoinAdmin,
+)
 
 rootRouter.get('/logout', UsersController.logout)
 rootRouter.post('/login', UsersController.login)
@@ -31,6 +36,11 @@ rootRouter.post(
   UsersController.signUp,
 )
 rootRouter.post('/join-vip', UserValidator.onlyAuth, UsersController.joinVip)
+rootRouter.post(
+  '/join-admin',
+  UserValidator.onlyAuth,
+  UsersController.joinAdmin,
+)
 
 rootRouter.post(
   '/new-message',

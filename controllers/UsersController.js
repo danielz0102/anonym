@@ -1,6 +1,7 @@
 import passport from 'passport'
 import UsersModel from '#models/UsersModel.js'
 import { BusinessError } from '#customErrors/BusinessError.js'
+import { ADMIN_SECRET } from '../config/config.js'
 
 function login(req, res, next) {
   passport.authenticate('local', (err, user, info) => {
@@ -74,9 +75,23 @@ async function joinVip(req, res) {
   res.redirect('/')
 }
 
+async function joinAdmin(req, res) {
+  const { secret } = req.body
+
+  if (secret !== ADMIN_SECRET) {
+    return res.render('join-admin', { error: 'The secret is wrong' })
+  }
+
+  await UsersModel.joinAdmin(req.user.id)
+  req.user.vip = true
+  req.user.admin = true
+  res.redirect('/')
+}
+
 export default {
   signUp,
   login,
   logout,
   joinVip,
+  joinAdmin,
 }

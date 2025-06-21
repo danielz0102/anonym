@@ -13,9 +13,15 @@
     <% if (locals.currentUser) { %>
     <a href="/new-message">Create a new message</a>
     <a href="/logout">Logout</a>
+
     <% if (!currentUser.vip) { %>
     <a href="/join-vip">Join VIP</a>
     <% } %>
+
+    <% if (!currentUser.admin) { %>
+    <a href="/join-admin">Join Admin</a>
+    <% } %>
+
     <% } else { %>
     <a href="/sign-up">Sign Up</a>
     <a href="/login">Login</a>

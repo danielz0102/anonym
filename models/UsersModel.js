@@ -54,8 +54,15 @@ async function joinVip(id) {
   await db.query('UPDATE users SET vip = TRUE WHERE id = $1', [id])
 }
 
+async function joinAdmin(id) {
+  await db.query('UPDATE users SET admin = TRUE, vip = TRUE WHERE id = $1', [
+    id,
+  ])
+}
+
 export default {
   create,
   getUser,
   joinVip,
+  joinAdmin,
 }

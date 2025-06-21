@@ -5,4 +5,5 @@ export const {
   SESSION_SECRET,
   NODE_ENV = 'development',
   SALT = 10,
+  ADMIN_SECRET,
 } = process.env

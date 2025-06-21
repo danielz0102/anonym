@@ -25,10 +25,19 @@ function renderNewMessage(req, res) {
   res.render('new-message')
 }
 
+function renderJoinAdmin(req, res) {
+  if (req.user.admin) {
+    return res.redirect('/')
+  }
+
+  res.render('join-admin')
+}
+
 export default {
   renderHome,
   renderSignUp,
   renderLogin,
   renderJoinVip,
   renderNewMessage,
+  renderJoinAdmin,
 }
