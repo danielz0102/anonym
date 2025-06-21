@@ -46,6 +46,7 @@ async function getUser(identifier) {
     username: user.username,
     password: user.password,
     vip: user.vip,
+    admin: user.admin,
   }
 }
 

@@ -37,6 +37,7 @@ passport.deserializeUser(async (id, done) => {
       id: user.id,
       username: user.username,
       vip: user.vip,
+      admin: user.admin,
     })
   } catch (error) {
     done(error)
