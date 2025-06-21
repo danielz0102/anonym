@@ -1,0 +1,16 @@
+:root {
+  --fg: #f0f0f0;
+  --bg: #1d1c1c;
+
+  --spacing-lg: calc(var(--spacing) * 2);
+  --spacing: 16px;
+  --spacing-sm: calc(var(--spacing) / 2);
+  --spacing-xs: calc(var(--spacing) / 4);
+
+  --danger: #cc2b2b;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+}
