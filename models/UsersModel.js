@@ -5,7 +5,12 @@ import { SALT } from '../config/config.js'
 import { BusinessError } from '#customErrors/BusinessError.js'
 
 async function create({ firstName, lastName, username, password }) {
-  if (await userExists(username)) {
+  const { rows: existingUserRows } = await db.query(
+    'SELECT * FROM users WHERE username = $1',
+    [username],
+  )
+
+  if (existingUserRows.length > 0) {
     throw new BusinessError('Username already exists')
   }
 
@@ -22,14 +27,6 @@ async function create({ firstName, lastName, username, password }) {
     lastName: user.last_name,
     username: username,
   }
-}
-
-async function userExists(username) {
-  const { rows } = await db.query('SELECT id FROM users WHERE username = $1', [
-    username,
-  ])
-
-  return rows.length > 0
 }
 
 async function getUser(identifier) {
@@ -58,7 +55,6 @@ async function joinVip(id) {
 
 export default {
   create,
-  userExists,
   getUser,
   joinVip,
 }
