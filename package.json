@@ -14,7 +14,8 @@
     "#validations/*": "./lib/validations/*",
     "#controllers/*": "./controllers/*",
     "#models/*": "./models/*",
-    "#validators/*": "./validators/*"
+    "#validators/*": "./validators/*",
+    "#customErrors/*": "./lib/customErrors/*"
   },
   "type": "module",
   "keywords": [],

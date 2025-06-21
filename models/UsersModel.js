@@ -1,16 +1,27 @@
 import bcrypt from 'bcryptjs'
+
 import { db } from '../db/index.js'
 import { SALT } from '../config/config.js'
+import { BusinessError } from '#customErrors/BusinessError.js'
 
 async function create({ firstName, lastName, username, password }) {
-  const hashedPassword = await bcrypt.hash(password, SALT)
+  if (await userExists(username)) {
+    throw new BusinessError('Username already exists')
+  }
 
+  const hashedPassword = await bcrypt.hash(password, SALT)
   const { rows } = await db.query(
     'INSERT INTO users (first_name, last_name, username, password) VALUES ($1, $2, $3, $4) RETURNING id',
     [firstName, lastName, username, hashedPassword],
   )
   const user = rows[0]
-  return Number(user.id)
+
+  return {
+    id: user.id,
+    firstName: user.first_name,
+    lastName: user.last_name,
+    username: username,
+  }
 }
 
 async function userExists(username) {
