@@ -11,7 +11,11 @@
   },
   "imports": {
     "#middlewares/*": "./lib/middlewares/*",
-    "#validations/*": "./lib/validations/*"
+    "#validations/*": "./lib/validations/*",
+    "#controllers/*": "./controllers/*",
+    "#models/*": "./models/*",
+    "#validators/*": "./validators/*",
+    "#customErrors/*": "./lib/customErrors/*"
   },
   "type": "module",
   "keywords": [],

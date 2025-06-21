@@ -1,24 +1,32 @@
 import bcrypt from 'bcryptjs'
+
 import { db } from '../db/index.js'
 import { SALT } from '../config/config.js'
+import { BusinessError } from '#customErrors/BusinessError.js'
 
 async function create({ firstName, lastName, username, password }) {
-  const hashedPassword = await bcrypt.hash(password, SALT)
+  const { rows: existingUserRows } = await db.query(
+    'SELECT * FROM users WHERE username = $1',
+    [username],
+  )
 
+  if (existingUserRows.length > 0) {
+    throw new BusinessError('Username already exists')
+  }
+
+  const hashedPassword = await bcrypt.hash(password, SALT)
   const { rows } = await db.query(
     'INSERT INTO users (first_name, last_name, username, password) VALUES ($1, $2, $3, $4) RETURNING id',
     [firstName, lastName, username, hashedPassword],
   )
   const user = rows[0]
-  return Number(user.id)
-}
 
-async function userExists(username) {
-  const { rows } = await db.query('SELECT id FROM users WHERE username = $1', [
-    username,
-  ])
-
-  return rows.length > 0
+  return {
+    id: user.id,
+    firstName: user.first_name,
+    lastName: user.last_name,
+    username: username,
+  }
 }
 
 async function getUser(identifier) {
@@ -47,7 +55,6 @@ async function joinVip(id) {
 
 export default {
   create,
-  userExists,
   getUser,
   joinVip,
 }
