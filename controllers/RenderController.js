@@ -1,5 +1,8 @@
-function renderHome(req, res) {
-  res.render('home')
+import MessagesModel from '#models/MessagesModel.js'
+
+async function renderHome(req, res) {
+  const messages = await MessagesModel.getAll()
+  res.render('home', { messages })
 }
 
 function renderSignUp(req, res) {
