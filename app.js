@@ -3,9 +3,12 @@ import session from 'express-session'
 import passport from 'passport'
 import './config/auth.js'
 
-import { rootRouter } from './routers/rootRouter.js'
 import { getSessionStore } from './db/index.js'
 import { SESSION_SECRET, NODE_ENV } from './config/config.js'
+
+import { rootRouter } from './routers/rootRouter.js'
+import { usersRouter } from './routers/usersRouter.js'
+import { messagesRouter } from './routers/messagesRouter.js'
 
 import { handleError } from '#middlewares/handleError.js'
 import { render404 } from '#middlewares/render404.js'
@@ -34,6 +37,8 @@ app.use(passport.session())
 app.use(setUser)
 
 app.use('/', rootRouter)
+app.use('/', usersRouter)
+app.use('/', messagesRouter)
 app.use(render404)
 app.use(handleError)
 
