@@ -1,3 +1,22 @@
+@font-face {
+  font-family: 'Noto Sans';
+  src: url('/fonts/NotoSans-Regular.woff2') format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Sans';
+  src: url('/fonts/NotoSans-Italic.woff2') format('woff2');
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Serif';
+  src: url('/fonts/NotoSerif-Regular.woff2') format('woff2');
+  font-display: swap;
+}
+
 :root {
   --fg: #f0f0f0;
   --bg: #1d1c1c;
@@ -13,4 +32,10 @@
 body {
   background-color: var(--bg);
   color: var(--fg);
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.title {
+  font-size: 3rem;
+  font-family: 'Noto Serif', serif;
 }

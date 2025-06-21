@@ -5,9 +5,8 @@
     <title>Anonym</title>
   </head>
   <body>
-    <h1>
-      Welcome
-      <%= locals.currentUser?.username || 'to Anonym' %>
+    <h1 class="title">
+      Welcome <%= locals.currentUser?.username || 'to Anonym' %>
     </h1>
     <% if (locals.currentUser) { %>
     <a href="/new-message">Create a new message</a>
