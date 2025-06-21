@@ -10,7 +10,7 @@ const getGeneralTextValidation = (fieldName) => ({
   },
 })
 
-export const validateUser = () =>
+export const checkSignUpForm = () =>
   checkSchema(
     {
       firstName: getGeneralTextValidation('First name'),

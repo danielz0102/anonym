@@ -1,6 +1,6 @@
 import { checkSchema } from 'express-validator'
 
-export const validateMessage = () =>
+export const checkCreateMessageForm = () =>
   checkSchema(
     {
       title: {

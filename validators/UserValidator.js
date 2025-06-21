@@ -1,8 +1,8 @@
 import { validationResult, matchedData } from 'express-validator'
-import { validateUser } from '#validations/validateUser.js'
+import { checkSignUpForm } from './validations/checkSignUpForm.js'
 
 export const validateSignUp = [
-  validateUser(),
+  checkSignUpForm(),
   (req, res, next) => {
     const errors = validationResult(req)
 
