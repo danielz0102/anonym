@@ -20,7 +20,7 @@ async function create({ userId, title, content }) {
 
 async function getAll(vip = false) {
   const { rows } = await db.query(
-    `SELECT u.username, m.title, m.content, m.created_at
+    `SELECT m.id, u.username, m.title, m.content, m.created_at
      FROM messages m
      JOIN users u ON m.user_id = u.id
      ORDER BY m.created_at DESC`,
@@ -35,6 +35,7 @@ async function getAll(vip = false) {
     })
 
   return rows.map((row) => ({
+    id: row.id,
     author: vip ? row.username : 'Anonymous',
     title: row.title,
     content: row.content,
@@ -42,7 +43,12 @@ async function getAll(vip = false) {
   }))
 }
 
+async function deleteMsg(id) {
+  await db.query('DELETE FROM messages WHERE id = $1', [id])
+}
+
 export default {
   create,
   getAll,
+  deleteMsg,
 }

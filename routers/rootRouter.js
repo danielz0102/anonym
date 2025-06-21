@@ -48,3 +48,8 @@ rootRouter.post(
   MessageValidator.validateCreateMessage,
   MessagesController.create,
 )
+rootRouter.post(
+  '/delete-message/:id',
+  UserValidator.onlyAdmin,
+  MessagesController.deleteMsg,
+)

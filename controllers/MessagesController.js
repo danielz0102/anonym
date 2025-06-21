@@ -12,6 +12,13 @@ async function create(req, res) {
   res.redirect('/')
 }
 
+async function deleteMsg(req, res) {
+  const { id } = req.params
+  await MessagesModel.deleteMsg(Number(id))
+  res.redirect('/')
+}
+
 export default {
   create,
+  deleteMsg,
 }

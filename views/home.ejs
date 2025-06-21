@@ -39,6 +39,13 @@
         <p><%= message.content %></p>
         <small><%= message.date %></small>
       </li>
+
+      <% if (locals.currentUser?.admin) { %>
+      <form action="delete-message/<%= message.id %>" method="post">
+        <button type="submit">Delete</button>
+      </form>
+      <% } %>
+
       <% } %>
     </ul>
   </body>

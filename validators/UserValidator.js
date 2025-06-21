@@ -37,7 +37,16 @@ export function onlyAuth(req, res, next) {
   res.redirect('/')
 }
 
+export function onlyAdmin(req, res, next) {
+  if (req.user?.admin) {
+    return next()
+  }
+
+  res.redirect('/')
+}
+
 export default {
   validateSignUp,
   onlyAuth,
+  onlyAdmin,
 }
