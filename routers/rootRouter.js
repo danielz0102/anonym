@@ -5,7 +5,7 @@ import MessagesController from '#controllers/MessagesController.js'
 import RenderController from '#controllers/RenderController.js'
 
 import UserValidator from '#validators/UserValidator.js'
-import { validateMessage } from '#validations/validateMessage.js'
+import MessageValidator from '#validators/MessageValidator.js'
 
 import { checkAuth } from '#middlewares/checkAuth.js'
 
@@ -25,9 +25,10 @@ rootRouter.post(
   UsersController.signUp,
 )
 rootRouter.post('/join-vip', checkAuth, UsersController.joinVip)
+
 rootRouter.post(
   '/new-message',
   checkAuth,
-  validateMessage(),
+  MessageValidator.validateCreateMessage,
   MessagesController.create,
 )
