@@ -7,15 +7,21 @@ import RenderController from '#controllers/RenderController.js'
 import UserValidator from '#validators/UserValidator.js'
 import MessageValidator from '#validators/MessageValidator.js'
 
-import { checkAuth } from '#middlewares/checkAuth.js'
-
 export const rootRouter = Router()
 
 rootRouter.get('/', RenderController.renderHome)
 rootRouter.get('/login', RenderController.renderLogin)
 rootRouter.get('/sign-up', RenderController.renderSignUp)
-rootRouter.get('/join-vip', checkAuth, RenderController.renderJoinVip)
-rootRouter.get('/new-message', checkAuth, RenderController.renderNewMessage)
+rootRouter.get(
+  '/join-vip',
+  UserValidator.onlyAuth,
+  RenderController.renderJoinVip,
+)
+rootRouter.get(
+  '/new-message',
+  UserValidator.onlyAuth,
+  RenderController.renderNewMessage,
+)
 
 rootRouter.get('/logout', UsersController.logout)
 rootRouter.post('/login', UsersController.login)
@@ -24,11 +30,11 @@ rootRouter.post(
   UserValidator.validateSignUp,
   UsersController.signUp,
 )
-rootRouter.post('/join-vip', checkAuth, UsersController.joinVip)
+rootRouter.post('/join-vip', UserValidator.onlyAuth, UsersController.joinVip)
 
 rootRouter.post(
   '/new-message',
-  checkAuth,
+  UserValidator.onlyAuth,
   MessageValidator.validateCreateMessage,
   MessagesController.create,
 )
