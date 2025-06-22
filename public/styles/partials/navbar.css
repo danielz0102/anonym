@@ -9,9 +9,8 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
-  color: var(--primary);
+  color: var(--fg);
   text-decoration: none;
-  font-size: 1.2rem;
   position: relative;
 
   &::after {
@@ -20,7 +19,7 @@
     bottom: -2px;
     width: 100%;
     height: 1px;
-    background-color: var(--primary);
+    background-color: var(--fg);
     transform: scaleX(0);
     transition: transform 0.2s ease-in-out;
   }

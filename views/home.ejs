@@ -3,39 +3,64 @@
   <head>
     <%- include('partials/commonHeadTags') %>
     <link rel="stylesheet" href="/styles/home.css" />
+    <script type="module" src="/scripts/home.js"></script>
     <title>Anonym</title>
   </head>
   <body>
     <%- include('partials/navbar') %>
     <main>
-      <h1 class="title">
+      <h1 class="hero-title">
         <%= locals.currentUser ? `Welcome, ${currentUser.firstName}` : 'Anonym'
         %>
       </h1>
-      <ul>
+      <ul class="messages">
         <% if (locals.messages.length === 0) { %>
-        <li>No messages yet. Be the first to create one!</li>
-        <% } %>
-
-        <% for (const message of locals.messages) { %>
-        <li>
-          <h3><%= message.title %></h3>
-          <span>
-            by
-            <%= message.author %>
-          </span>
-          <p><%= message.content %></p>
-          <small><%= message.date %></small>
+        <li class="empty">
+          <img src="/images/folder.webp" alt="" /> No messages yet. Be the first
+          to create one!
         </li>
-
-        <% if (locals.currentUser?.admin) { %>
-        <form action="delete-message/<%= message.id %>" method="post">
-          <button type="submit">Delete</button>
-        </form>
         <% } %>
-
+        <% for (const message of locals.messages) { %>
+        <li class="message">
+          <header class="message-header">
+            <p><%= message.author %></p>
+          </header>
+          <main class="message-content">
+            <h2><%= message.title %></h2>
+            <p><%= message.content %></p>
+          </main>
+          <footer class="message-footer">
+            <% if (locals.currentUser) { %>
+            <small class="date">
+              <%- include('icons/calendar', { className: 'icon' }) %> <%=
+              message.date %>
+            </small>
+            <% } %>
+            <% if (locals.currentUser?.admin) { %>
+            <form
+              action="delete-message/<%= message.id %>"
+              method="post"
+              class="delete-message-form"
+            >
+              <button class="btn btn--danger">
+                <%- include('icons/trash', { className: 'icon' }) %> Delete
+              </button>
+            </form>
+          </footer>
+          <% } %>
+        </li>
         <% } %>
       </ul>
     </main>
+    <dialog id="confirmDeleteDlg">
+      <div class="modal-content">
+        <h3>Confirm Deletion</h3>
+        <p>This message cannot be recovered</p>
+        <form method="dialog" action="">
+          <button class="btn btn--secondary">Cancel</button>
+          <button class="btn btn--danger" id="confirmDeleteBtn">Confirm</button>
+        </form>
+      </div>
+    </dialog>
   </body>
 </html>
