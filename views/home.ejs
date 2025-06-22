@@ -2,49 +2,40 @@
 <html lang="en">
   <head>
     <%- include('partials/commonHeadTags') %>
+    <link rel="stylesheet" href="/styles/home.css" />
     <title>Anonym</title>
   </head>
   <body>
-    <h1 class="title">
-      Welcome <%= locals.currentUser?.username || 'to Anonym' %>
-    </h1>
-    <% if (locals.currentUser) { %>
-    <a href="/new-message">Create a new message</a>
-    <a href="/logout">Logout</a>
+    <%- include('partials/navbar') %>
+    <main>
+      <h1 class="title">
+        <%= locals.currentUser ? `Welcome, ${currentUser.firstName}` : 'Anonym'
+        %>
+      </h1>
+      <ul>
+        <% if (locals.messages.length === 0) { %>
+        <li>No messages yet. Be the first to create one!</li>
+        <% } %>
 
-    <% if (!currentUser.vip) { %>
-    <a href="/join-vip">Join VIP</a>
-    <% } %>
+        <% for (const message of locals.messages) { %>
+        <li>
+          <h3><%= message.title %></h3>
+          <span>
+            by
+            <%= message.author %>
+          </span>
+          <p><%= message.content %></p>
+          <small><%= message.date %></small>
+        </li>
 
-    <% if (!currentUser.admin) { %>
-    <a href="/join-admin">Join Admin</a>
-    <% } %>
+        <% if (locals.currentUser?.admin) { %>
+        <form action="delete-message/<%= message.id %>" method="post">
+          <button type="submit">Delete</button>
+        </form>
+        <% } %>
 
-    <% } else { %>
-    <a href="/sign-up">Sign Up</a>
-    <a href="/login">Login</a>
-    <% } %>
-
-    <h2>Messages</h2>
-    <ul>
-      <% for (const message of locals.messages) { %>
-      <li>
-        <h3><%= message.title %></h3>
-        <span>
-          by
-          <%= message.author %>
-        </span>
-        <p><%= message.content %></p>
-        <small><%= message.date %></small>
-      </li>
-
-      <% if (locals.currentUser?.admin) { %>
-      <form action="delete-message/<%= message.id %>" method="post">
-        <button type="submit">Delete</button>
-      </form>
-      <% } %>
-
-      <% } %>
-    </ul>
+        <% } %>
+      </ul>
+    </main>
   </body>
 </html>

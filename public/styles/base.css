@@ -26,6 +26,7 @@
   --spacing-sm: calc(var(--spacing) / 2);
   --spacing-xs: calc(var(--spacing) / 4);
 
+  --primary: #b8f5d7;
   --danger: #cc2b2b;
 }
 
@@ -33,9 +34,17 @@ body {
   background-color: var(--bg);
   color: var(--fg);
   font-family: 'Noto Sans', sans-serif;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100dvh;
 }
 
 .title {
   font-size: 3rem;
   font-family: 'Noto Serif', serif;
+  font-weight: 450;
+}
+
+ul {
+  list-style: none;
 }

@@ -1,0 +1,35 @@
+#navbar ul {
+  display: flex;
+  gap: var(--spacing);
+  justify-content: center;
+  padding: var(--spacing);
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 1.2rem;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    width: 100%;
+    height: 1px;
+    background-color: var(--primary);
+    transform: scaleX(0);
+    transition: transform 0.2s ease-in-out;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+  }
+
+  &:active {
+    opacity: 0.5;
+  }
+}

@@ -35,6 +35,7 @@ passport.deserializeUser(async (id, done) => {
     const user = await UsersModel.getUser(Number(id))
     done(null, {
       id: user.id,
+      firstName: user.firstName,
       username: user.username,
       vip: user.vip,
       admin: user.admin,
