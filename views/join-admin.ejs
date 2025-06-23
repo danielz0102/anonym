@@ -3,24 +3,33 @@
   <head>
     <%- include('partials/commonHeadTags') %>
     <title>Join Admin</title>
+    <link rel="stylesheet" href="/styles/partials/form.css" />
+    <link rel="stylesheet" href="/styles/simple-form.css" />
   </head>
   <body>
-    <h1>Join Admin</h1>
+    <%- include('partials/navbar') %>
+    <main>
+      <h1>Join Admin</h1>
 
-    <% if (locals.error) { %>
-    <p><%= error %></p>
-    <% } %>
+      <% if (locals.error) { %>
+      <p><%= error %></p>
+      <% } %>
 
-    <form action="join-admin" method="post">
-      <label for="secret">Enter the secret key</label>
-      <input
-        type="password"
-        id="secret"
-        name="secret"
-        placeholder="********"
-        required
-      />
-      <button type="submit">Join VIP</button>
-    </form>
+      <form action="join-admin" method="post" class="form">
+        <div class="form-field">
+          <label for="secret">Enter the secret key</label>
+          <input
+            type="password"
+            id="secret"
+            name="secret"
+            placeholder="********"
+            required
+          />
+        </div>
+        <button class="btn" type="submit">
+          <%- include('icons/send') %> Join
+        </button>
+      </form>
+    </main>
   </body>
 </html>

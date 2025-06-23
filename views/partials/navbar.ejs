@@ -7,11 +7,6 @@
           <%- include('../icons/send') %> Send a new message
         </a>
       </li>
-      <li>
-        <a class="link" href="/logout">
-          <%- include('../icons/logout') %> Logout
-        </a>
-      </li>
 
       <% if (!currentUser.vip) { %>
       <li>
@@ -24,12 +19,16 @@
       <% if (!currentUser.admin) { %>
       <li>
         <a class="link" href="/join-admin">
-          <%- include('../icons/admin') %>
-          Join Admin
+          <%- include('../icons/admin') %> Join Admin
         </a>
       </li>
       <% } %>
-
+      
+      <li>
+        <a class="link" href="/logout">
+          <%- include('../icons/logout') %> Logout
+        </a>
+      </li>
       <% } else { %>
       <li>
         <a class="link" href="/login">

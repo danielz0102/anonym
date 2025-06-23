@@ -1,0 +1,50 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing);
+  width: 100%;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+
+  & input,
+  textarea {
+    --shadow-color: #fff;
+
+    border: none;
+    color: var(--bg);
+    padding: 4px 8px;
+    border-radius: 2px;
+    outline: none;
+
+    &:focus-visible {
+      box-shadow: 0 0 5px var(--shadow-color);
+    }
+
+    &:user-invalid {
+      --shadow-color: var(--danger);
+      background-color: var(--danger-light);
+
+      &::placeholder {
+        color: var(--danger);
+      }
+    }
+
+    &:user-valid {
+      --shadow-color: var(--success);
+      background-color: var(--success-light);
+    }
+  }
+}
+
+.form-group {
+  display: flex;
+  gap: var(--spacing);
+
+  & > * {
+    flex: 1;
+  }
+}

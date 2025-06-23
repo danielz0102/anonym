@@ -30,7 +30,7 @@
             <p><%= message.content %></p>
           </main>
           <footer class="message-footer">
-            <% if (locals.currentUser) { %>
+            <% if (message.date) { %>
             <small class="date">
               <%- include('icons/calendar', { className: 'icon' }) %> <%=
               message.date %>
@@ -58,7 +58,9 @@
         <p>This message cannot be recovered</p>
         <form method="dialog" action="">
           <button class="btn btn--secondary">Cancel</button>
-          <button class="btn btn--danger" id="confirmDeleteBtn">Confirm</button>
+          <button class="btn btn--danger" id="confirmDeleteBtn">
+            <%- include('icons/trash', { className: 'icon' }) %> Confirm
+          </button>
         </form>
       </div>
     </dialog>

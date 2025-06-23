@@ -3,20 +3,41 @@
   <head>
     <%- include('partials/commonHeadTags') %>
     <title>Login</title>
+    <link rel="stylesheet" href="/styles/partials/form.css" />
+    <link rel="stylesheet" href="/styles/simple-form.css" />
   </head>
   <body>
-    <h1>Login</h1>
+    <%- include('partials/navbar') %>
+    <main>
+      <h1>Login</h1>
 
-    <% if (locals.loginError) { %>
-    <p><%= loginError %></p>
-    <% } %>
+      <% if (locals.loginError) { %>
+      <p><%= loginError %></p>
+      <% } %>
 
-    <form action="/login" method="post">
-      <label for="username">Username</label>
-      <input type="text" id="username" name="username" required />
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" required />
-      <button>Login</button>
-    </form>
+      <form action="/login" method="post" class="form">
+        <div class="form-field">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Enter your username"
+            required
+          />
+        </div>
+        <div class="form-field">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="********"
+            required
+          />
+        </div>
+        <button class="btn"><%- include('icons/send') %> Login</button>
+      </form>
+    </main>
   </body>
 </html>
