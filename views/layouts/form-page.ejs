@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/commonHeadTags') %>
+    <title><%= content.title %></title>
+    <link rel="stylesheet" href="/styles/partials/form.css" />
+    <link rel="stylesheet" href="/styles/simple-form.css" />
+  </head>
+  <body>
+    <%- include('../partials/navbar') %>
+    <main>
+      <h1><%= content.title %></h1>
+
+      <% if (content.error) { %>
+      <p><%= error %></p>
+      <% } %>
+
+      <form action="<%= content.action %>" method="post" class="form">
+        <% content.fields.forEach(field => { %>
+        <div class="form-field">
+          <label for="<%= field.id %>"><%= field.label %></label>
+          <% if (field.type !== 'textarea') { %>
+          <input
+            type="<%= field.type %>"
+            id="<%= field.id %>"
+            name="<%= field.name %>"
+            placeholder="<%= field.placeholder %>"
+            required
+          />
+          <% } else { %>
+          <textarea
+            id="<%= field.id %>"
+            name="<%= field.name %>"
+            placeholder="<%= field.placeholder %>"
+            rows="5"
+            required
+          ></textarea>
+          <% } %>
+        </div>
+        <% }) %>
+        <button class="btn" type="submit">
+          <%- include('../icons/send') %> <%= content.btnTxt %>
+        </button>
+      </form>
+    </main>
+  </body>
+</html>

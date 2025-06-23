@@ -1,5 +1,6 @@
 .hero-title {
-  font-size: clamp(3rem, 10vw, 4rem);
+  font-size: 3rem;
+  text-align: center;
 }
 
 .empty {

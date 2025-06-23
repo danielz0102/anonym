@@ -1,43 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <%- include('partials/commonHeadTags') %>
-    <title>Login</title>
-    <link rel="stylesheet" href="/styles/partials/form.css" />
-    <link rel="stylesheet" href="/styles/simple-form.css" />
-  </head>
-  <body>
-    <%- include('partials/navbar') %>
-    <main>
-      <h1>Login</h1>
-
-      <% if (locals.loginError) { %>
-      <p><%= loginError %></p>
-      <% } %>
-
-      <form action="/login" method="post" class="form">
-        <div class="form-field">
-          <label for="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            placeholder="Enter your username"
-            required
-          />
-        </div>
-        <div class="form-field">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="********"
-            required
-          />
-        </div>
-        <button class="btn"><%- include('icons/send') %> Login</button>
-      </form>
-    </main>
-  </body>
-</html>
+<%- include('layouts/form-page', { 
+  content: { 
+    title: 'Login', 
+    action: '/login',
+    fields: [ 
+      {
+        id: 'username', 
+        label: 'Username', 
+        type: 'text', 
+        name: 'username', 
+        placeholder: 'Enter your username' 
+      },
+      { 
+        id: 'password', 
+        label: 'Password', 
+        type: 'password', 
+        name: 'password', 
+        placeholder: '********' 
+      }
+    ],
+    btnTxt: 'Login',
+    error: locals.error
+  }
+}) %>
