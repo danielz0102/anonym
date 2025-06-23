@@ -12,7 +12,9 @@
       <h1><%= content.title %></h1>
 
       <% if (content.error) { %>
-      <p><%= error %></p>
+      <p class="alert-error">
+        <%- include('../icons/alert') %> <%= content.error %>
+      </p>
       <% } %>
 
       <form action="<%= content.action %>" method="post" class="form">

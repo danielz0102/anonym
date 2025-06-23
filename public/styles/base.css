@@ -117,3 +117,12 @@ ul {
   --btn-hover-fg: var(--fg);
   --btn-hover-opacity: 0.5;
 }
+
+.alert-error {
+  background-color: var(--danger);
+  border-radius: 32px;
+  padding: 8px 16px;
+
+  display: flex;
+  gap: var(--spacing-sm);
+}

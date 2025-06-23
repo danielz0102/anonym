@@ -2,7 +2,6 @@ import bcrypt from 'bcryptjs'
 
 import { db } from '../db/index.js'
 import { SALT } from '../config/config.js'
-import { BusinessError } from '#customErrors/BusinessError.js'
 
 async function create({ firstName, lastName, username, password }) {
   const { rows: existingUserRows } = await db.query(
@@ -11,7 +10,7 @@ async function create({ firstName, lastName, username, password }) {
   )
 
   if (existingUserRows.length > 0) {
-    throw new BusinessError('Username already exists')
+    return false
   }
 
   const hashedPassword = await bcrypt.hash(password, SALT)

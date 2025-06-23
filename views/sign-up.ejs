@@ -11,7 +11,11 @@
     <%- include('partials/navbar') %>
     <main>
       <h1>Sign Up</h1>
-      <p><%= locals.logicError %></p>
+
+      <% if (locals.logicError) { %>
+      <p class="alert-error"><%- include('icons/alert') %> <%= logicError %></p>
+      <% } %>
+
       <% if (locals.validationErrors) { %>
       <ul>
         <% validationErrors.forEach((error) => { %>

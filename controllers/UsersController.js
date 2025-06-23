@@ -1,6 +1,5 @@
 import passport from 'passport'
 import UsersModel from '#models/UsersModel.js'
-import { BusinessError } from '#customErrors/BusinessError.js'
 import { ADMIN_SECRET } from '../config/config.js'
 
 function login(req, res, next) {
@@ -34,24 +33,18 @@ function logout(req, res) {
 
 async function signUp(req, res, next) {
   const { firstName, lastName, username, password } = req.body
-  let userInserted = null
+  const userInserted = await UsersModel.create({
+    firstName,
+    lastName,
+    username,
+    password,
+  })
 
-  try {
-    userInserted = await UsersModel.create({
-      firstName,
-      lastName,
-      username,
-      password,
+  if (!userInserted) {
+    return res.render('sign-up', {
+      logicError: 'Username already exists',
+      formData: { firstName, lastName, username },
     })
-  } catch (err) {
-    if (err instanceof BusinessError) {
-      return res.render('sign-up', {
-        logicError: err.message,
-        formData: { firstName, lastName, username },
-      })
-    }
-
-    next(err)
   }
 
   req.login(userInserted, (err) => {
