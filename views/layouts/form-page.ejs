@@ -42,6 +42,14 @@
           <%- include('../icons/send') %> <%= content.btnTxt %>
         </button>
       </form>
+
+      <% if (content.link) { %>
+      <p>
+        <a class="link" href="<%= content.link.href %>">
+          <%= content.link.text %>
+        </a>
+      </p>
+      <% } %>
     </main>
   </body>
 </html>
